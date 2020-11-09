@@ -8,7 +8,7 @@ class MissingEnvVars
 {
     use Dispatchable;
 
-    protected $diffs;
+    public $diffs;
 
     public function __construct($diffs)
     {
