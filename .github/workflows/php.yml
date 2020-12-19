@@ -20,8 +20,9 @@ jobs:
         run: XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
       - name: scrutinizer
+        depe
         run: |
-          ls -l converage.clover
+          ls -l coverage.clover
           wget https://scrutinizer-ci.com/ocular.phar
           php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
