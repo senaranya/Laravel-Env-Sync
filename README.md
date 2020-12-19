@@ -1,6 +1,6 @@
-[![Tests](https://github.com/JulienTant/Laravel-Env-Sync/workflows/Tests/badge.svg?branch=master&event=push)](https://github.com/JulienTant/Laravel-Env-Sync/actions?query=branch%3Amaster)
-[![Scrutinizer](https://img.shields.io/scrutinizer/g/JulienTant/Laravel-Env-Sync.svg?maxAge=3600)](https://scrutinizer-ci.com/g/JulienTant/Laravel-Env-Sync/?branch=master)
-[![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/JulienTant/Laravel-Env-Sync.svg?maxAge=3600)](https://scrutinizer-ci.com/g/JulienTant/Laravel-Env-Sync/?branch=master)
+[![Tests](https://github.com/AranyaSen/Laravel-Env-Sync/workflows/Tests/badge.svg?branch=master&event=push)](https://github.com/AranyaSen/Laravel-Env-Sync/actions?query=branch%3Amaster)
+[![Scrutinizer](https://img.shields.io/scrutinizer/g/AranyaSen/Laravel-Env-Sync.svg?maxAge=3600)](https://scrutinizer-ci.com/g/AranyaSen/Laravel-Env-Sync/?branch=master)
+[![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/AranyaSen/Laravel-Env-Sync.svg?maxAge=3600)](https://scrutinizer-ci.com/g/AranyaSen/Laravel-Env-Sync/?branch=master)
 
 # Laravel Env Sync
 
