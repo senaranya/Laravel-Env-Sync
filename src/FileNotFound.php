@@ -2,4 +2,6 @@
 
 namespace Aranyasen\LaravelEnvSync;
 
-class FileNotFound extends \Exception{}
+use Exception;
+
+class FileNotFound extends Exception {}

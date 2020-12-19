@@ -2,6 +2,7 @@
 
 namespace Aranyasen\LaravelEnvSync\Tests\Console;
 
+use Aranyasen\LaravelEnvSync\Console\CheckCommand;
 use Aranyasen\LaravelEnvSync\EnvSyncServiceProvider;
 use Illuminate\Support\Facades\Artisan;
 use Orchestra\Testbench\TestCase;
@@ -12,14 +13,6 @@ class CheckCommandTest extends TestCase
     protected function getPackageProviders($app): array
     {
         return [EnvSyncServiceProvider::class];
-    }
-
-    protected function tearDown(): void
-    {
-        @unlink(vfsStream::setup()->url() . '/.env');
-        @unlink(vfsStream::setup()->url() . '/.env.example');
-
-        parent::tearDown();
     }
 
     /** @test */
@@ -33,10 +26,14 @@ class CheckCommandTest extends TestCase
         file_put_contents($root->url() . '/.env', $env);
 
         $this->app->setBasePath($root->url());
-        self::assertSame(0, Artisan::call('env:check'));
+        self::assertSame(CheckCommand::SUCCESS, Artisan::call('env:check'));
     }
 
-    /** @test */
+    /**
+     * @test
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
     public function it_should_return_1_when_files_are_different(): void
     {
         $root = vfsStream::setup();
@@ -46,10 +43,14 @@ class CheckCommandTest extends TestCase
         file_put_contents($root->url() . '/.env.example', $example);
         file_put_contents($root->url() . '/.env', $env);
         $this->app->setBasePath($root->url());
-        self::assertSame(1, Artisan::call('env:check'));
+        self::assertSame(CheckCommand::FAILURE, Artisan::call('env:check'));
     }
 
-    /** @test */
+    /**
+     * @test
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
     public function it_should_work_in_reverse_mode(): void
     {
         $root = vfsStream::setup();
@@ -60,6 +61,6 @@ class CheckCommandTest extends TestCase
         file_put_contents($root->url() . '/.env', $env);
 
         $this->app->setBasePath($root->url());
-        self::assertSame(1, Artisan::call('env:check', ["--reverse" => true]));
+        self::assertSame(CheckCommand::FAILURE, Artisan::call('env:check', ["--reverse" => true]));
     }
 }
