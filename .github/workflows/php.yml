@@ -21,6 +21,7 @@ jobs:
 
       - name: scrutinizer
         run: |
+          ls -l converage.clover
           wget https://scrutinizer-ci.com/ocular.phar
           php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
