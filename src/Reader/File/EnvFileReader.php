@@ -23,6 +23,6 @@ class EnvFileReader implements ReaderInterface
         $dir = dirname($resource);
         $name = basename($resource);
 
-        return Dotenv::createImmutable($dir, $name)->load();
+        return Dotenv::createMutable($dir, $name)->load();
     }
 }

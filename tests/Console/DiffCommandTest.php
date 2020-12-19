@@ -25,7 +25,7 @@ class DiffCommandTest extends TestCase
         file_put_contents($root->url() . '/.env', $env);
 
         $this->app->setBasePath($root->url());
-        $returnCode = Artisan::call('env:diff', []);
+        $returnCode = Artisan::call('env:diff');
 
         $expected = <<<TAG
 +-----+-----------+--------------+

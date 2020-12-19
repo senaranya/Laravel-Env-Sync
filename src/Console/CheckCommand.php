@@ -2,11 +2,15 @@
 
 namespace Aranyasen\LaravelEnvSync\Console;
 
+use Aranyasen\LaravelEnvSync\FileNotFound;
 use Aranyasen\LaravelEnvSync\Events\MissingEnvVars;
 use Aranyasen\LaravelEnvSync\SyncService;
 
 class CheckCommand extends BaseCommand
 {
+    public const SUCCESS = 0;
+    public const FAILURE = 1;
+
     /**
      * The name and signature of the console command.
      *
@@ -38,8 +42,9 @@ class CheckCommand extends BaseCommand
      * Execute the console command.
      *
      * @return mixed
+     * @throws FileNotFound
      */
-    public function handle()
+    public function handle(): int
     {
         [$src, $dest] = $this->getSrcAndDest();
 
@@ -51,7 +56,7 @@ class CheckCommand extends BaseCommand
 
         if (count($diffs) === 0) {
             $this->info(sprintf("Your %s file is already in sync with %s", basename($dest), basename($src)));
-            return 0;
+            return self::SUCCESS;
         }
 
         MissingEnvVars::dispatch($diffs);
