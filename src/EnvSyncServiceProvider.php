@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Aranyasen\LaravelEnvSync;
 
 use Illuminate\Support\ServiceProvider;
@@ -10,22 +12,7 @@ use Aranyasen\LaravelEnvSync\Writer\WriterInterface;
 
 class EnvSyncServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
-
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
-    public function register()
+    public function register(): void
     {
         // bindings
         $this->app->bind(ReaderInterface::class, EnvFileReader::class);
@@ -37,13 +24,11 @@ class EnvSyncServiceProvider extends ServiceProvider
         $this->commands(Console\DiffCommand::class);
     }
 
-    public function provides()
+    public function provides(): array
     {
         return [
             ReaderInterface::class,
             WriterInterface::class,
         ];
     }
-
-
 }

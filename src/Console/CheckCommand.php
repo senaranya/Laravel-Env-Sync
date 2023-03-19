@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Aranyasen\LaravelEnvSync\Console;
 
 use Aranyasen\LaravelEnvSync\FileNotFound;
 use Aranyasen\LaravelEnvSync\Events\MissingEnvVars;
 use Aranyasen\LaravelEnvSync\SyncService;
+use RuntimeException;
+use Symfony\Component\Console\Command\Command;
 
 class CheckCommand extends BaseCommand
 {
@@ -46,7 +50,12 @@ class CheckCommand extends BaseCommand
      */
     public function handle(): int
     {
-        [$src, $dest] = $this->getSrcAndDest();
+        try {
+            [$src, $dest] = $this->getSrcAndDest();
+        } catch (RuntimeException $exception) {
+            $this->error($exception->getMessage());
+            return Command::FAILURE;
+        }
 
         if ($this->option('reverse')) {
             [$src, $dest] = [$dest, $src];

@@ -1,25 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Aranyasen\LaravelEnvSync\Tests\Writer\File;
 
+use Aranyasen\LaravelEnvSync\Tests\TestCase;
 use Aranyasen\LaravelEnvSync\Writer\File\EnvFileWriter;
 use Aranyasen\LaravelEnvSync\Writer\WriterInterface;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Exceptions\Handler;
-use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamDirectory;
-use PHPUnit\Framework\TestCase;
 use Throwable;
 
 class EnvFileWriterTest extends TestCase
 {
-    private vfsStreamDirectory $fs;
     private WriterInterface $writer;
 
     protected function setUp(): void
     {
+        parent::setUp();
         $this->writer = new EnvFileWriter();
-        $this->fs = vfsStream::setup("write_env");
     }
 
     /** @test */
@@ -36,21 +35,18 @@ class EnvFileWriterTest extends TestCase
             }
         });
 
-        $filePath = $this->fs->url() . '/.env';
+        $filePath = $this->getFilePath('.env');
 
-        $lines = [
-            'test=foo',
-            'foo=baz',
-        ];
-        file_put_contents($filePath, implode(PHP_EOL, $lines));
+        $this->setEnvFile('.env', "test=foo" . PHP_EOL . "foo=baz");
         $this->writer->append($filePath, 'phpunit', 'rocks hard');
 
-        $lines = file($filePath);
-
-        self::assertSame([
-            "test=foo" . PHP_EOL,
-            "foo=baz" . PHP_EOL,
-            "phpunit=\"rocks hard\""
-        ], $lines);
+        self::assertSame(
+            [
+                "test=foo" . PHP_EOL,
+                "foo=baz" . PHP_EOL,
+                "phpunit=\"rocks hard\"",
+            ],
+            file($filePath)
+        );
     }
 }

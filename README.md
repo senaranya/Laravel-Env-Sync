@@ -17,11 +17,9 @@ composer require aranyasen/laravel-env-sync
 ```
 
 
-Then, if you use laravel < 5.5,  add the `Aranyasen\LaravelEnvSync\EnvSyncServiceProvider::class` service provider to your `config/app.php` file, and that's it
-
 ## Usage
 
-### Sync your envs files
+### Sync your dotenv files
 
 You can populate your .env file from the .env.example by using the `php artisan env:sync` command.
 
@@ -33,7 +31,7 @@ You can also use `--src` and `--dest` to specify which file you want to use. You
 
 If you use the `--no-interaction` flag, the command will copy all new keys with their default values.
 
-### Check for diff in your envs files
+### Check for diff in your dotenv files
 
 You can check if your .env is missing some variables from your .env.example by using the `php artisan env:check` command.
 
@@ -43,7 +41,7 @@ Again, you can launch the command with the option `--reverse` or with `--src` an
 
 The command will also dispatch event `Aranyasen\LaravelEnvSync\Events\MissingEnvVars`, which will contain the missing env variables, which could be used in automatic deployments. Event is only fired when there are missing env variables.
 
-### Show diff between your envs files
+### Show diff between your dotenv files
 
 You can show a table that compares the content of your env files by using the `php artisan env:diff` command.
 
