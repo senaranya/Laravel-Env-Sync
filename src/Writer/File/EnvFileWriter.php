@@ -1,19 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Aranyasen\LaravelEnvSync\Writer\File;
 
 use Aranyasen\LaravelEnvSync\Writer\WriterInterface;
 
 class EnvFileWriter implements WriterInterface
 {
-    /**
-     * Append a new par of key/value to an env resource
-     *
-     * @param string|null $resource resource where is located the env content
-     */
-    public function append($resource, $key, $value)
+    public function append(string $dotEnvFile, $key, $value): void
     {
-        $lastChar = substr(file_get_contents($resource), -1);
+        $lastChar = substr(file_get_contents($dotEnvFile), -1);
 
         $prefix = "";
         if ($lastChar !== "\n" && $lastChar !== "\r" && strlen($lastChar) === 1) {
@@ -24,6 +21,6 @@ class EnvFileWriter implements WriterInterface
             $value = '"' . $value . '"';
         }
 
-        file_put_contents($resource, $prefix . $key . '=' . $value, FILE_APPEND);
+        file_put_contents($dotEnvFile, $prefix . $key . '=' . $value, FILE_APPEND);
     }
 }

@@ -2,16 +2,16 @@
   "name": "aranyasen/laravel-env-sync",
   "description": "A package that makes sure that your .env file is in sync with your .env.example",
   "type": "library",
-  "autoload": {
-    "psr-4": {
-      "Aranyasen\\LaravelEnvSync\\": "src/"
+  "license": "MIT",
+  "keywords": ["Laravel", "dotenv", "diff", "sync"],
+  "authors": [
+    {
+      "name": "Aranya Sen",
+      "email": "sen.aranya@gmail.com",
+      "role": "Owner"
     }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Aranyasen\\LaravelEnvSync\\Tests\\": "tests/"
-    }
-  },
+  ],
+  "minimum-stability": "stable",
   "require": {
     "php": ">=8.1",
     "vlucas/phpdotenv": "^5",
@@ -25,13 +25,20 @@
     "mikey179/vfsstream": "^1.6",
     "phpunit/phpunit": "^9.5"
   },
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Aranya Sen",
-      "email": "sen.aranya@gmail.com"
+  "autoload": {
+    "psr-4": {
+      "Aranyasen\\LaravelEnvSync\\": "src/"
     }
-  ],
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Aranyasen\\LaravelEnvSync\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit tests/ --coverage-text",
+    "lint": "vendor/bin/phpcs"
+  },
   "extra": {
     "laravel": {
       "providers": [
@@ -41,6 +48,5 @@
     "branch-alias": {
         "dev-master": "0.1.x-dev"
     }
-  },
-  "minimum-stability": "stable"
+  }
 }

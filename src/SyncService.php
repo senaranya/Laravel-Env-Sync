@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Aranyasen\LaravelEnvSync;
 
 use Aranyasen\LaravelEnvSync\Reader\ReaderInterface;

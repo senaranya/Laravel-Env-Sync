@@ -1,31 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Aranyasen\LaravelEnvSync\Tests\Console;
 
 use Aranyasen\LaravelEnvSync\Console\CheckCommand;
-use Aranyasen\LaravelEnvSync\EnvSyncServiceProvider;
+use Aranyasen\LaravelEnvSync\Tests\TestCase;
 use Illuminate\Support\Facades\Artisan;
-use Orchestra\Testbench\TestCase;
-use org\bovigo\vfs\vfsStream;
+use Symfony\Component\Console\Command\Command;
 
 class CheckCommandTest extends TestCase
 {
-    protected function getPackageProviders($app): array
-    {
-        return [EnvSyncServiceProvider::class];
-    }
-
     /** @test */
     public function it_should_return_0_when_keys_are_in_both_files(): void
     {
-        $root = vfsStream::setup();
-        $example = "FOO=BAR" . PHP_EOL . "BAR=BAZ". PHP_EOL . "BAZ=FOO";
-        $env = "BAR=BAZ" . PHP_EOL . "FOO=BAR" . PHP_EOL . "BAZ=FOO";
+        $this->setEnvFile('.env.example', "FOO=BAR\n" . "BAR=BAZ\n". "BAZ=FOO");
+        $this->setEnvFile('.env', "BAR=BAZ\n" . "FOO=BAR\n" . "BAZ=FOO");
 
-        file_put_contents($root->url() . '/.env.example', $example);
-        file_put_contents($root->url() . '/.env', $env);
-
-        $this->app->setBasePath($root->url());
         self::assertSame(CheckCommand::SUCCESS, Artisan::call('env:check'));
     }
 
@@ -36,13 +27,8 @@ class CheckCommandTest extends TestCase
      */
     public function it_should_return_1_when_files_are_different(): void
     {
-        $root = vfsStream::setup();
-        $example = "FOO=BAR" . PHP_EOL . "BAR=BAZ". PHP_EOL . "BAZ=FOO";
-        $env = "FOO=BAR" . PHP_EOL . "BAZ=FOO";
-
-        file_put_contents($root->url() . '/.env.example', $example);
-        file_put_contents($root->url() . '/.env', $env);
-        $this->app->setBasePath($root->url());
+        $this->setEnvFile('.env.example', "FOO=BAR\n" . "BAR=BAZ\n" . "BAZ=FOO");
+        $this->setEnvFile('.env', "FOO=BAR\n" . "BAZ=FOO");
         self::assertSame(CheckCommand::FAILURE, Artisan::call('env:check'));
     }
 
@@ -53,14 +39,18 @@ class CheckCommandTest extends TestCase
      */
     public function it_should_work_in_reverse_mode(): void
     {
-        $root = vfsStream::setup();
-        $env = "FOO=BAR" . PHP_EOL . "BAR=BAZ" . PHP_EOL . "BAZ=FOO";
-        $example = "FOO=BAR" . PHP_EOL . "BAZ=FOO";
+        $this->setEnvFile('.env.example', "FOO=BAR\n" . "BAZ=FOO");
+        $this->setEnvFile('.env', "FOO=BAR\n" . "BAR=BAZ\n" . "BAZ=FOO");
 
-        file_put_contents($root->url() . '/.env.example', $example);
-        file_put_contents($root->url() . '/.env', $env);
-
-        $this->app->setBasePath($root->url());
         self::assertSame(CheckCommand::FAILURE, Artisan::call('env:check', ["--reverse" => true]));
+    }
+
+    /** @test */
+    public function it_throws_exception_when_one_dotenv_is_provided_but_not_the_other(): void
+    {
+        $this
+            ->artisan('env:check', ['--src' => $this->getFilePath('.foo')])
+            ->expectsOutput("You must use either both src and dest options, or none.")
+            ->assertExitCode(Command::FAILURE);
     }
 }

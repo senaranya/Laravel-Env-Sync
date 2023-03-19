@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Aranyasen\LaravelEnvSync\Console;
 
 use Aranyasen\LaravelEnvSync\Reader\ReaderInterface;
+use RuntimeException;
+use Symfony\Component\Console\Command\Command;
 
 class DiffCommand extends BaseCommand
 {
@@ -22,7 +26,7 @@ class DiffCommand extends BaseCommand
 
     private ReaderInterface $reader;
 
-    private int $returnCode = 0;
+    private int $returnCode = Command::SUCCESS;
 
     /**
      * Create a new command instance.
@@ -35,14 +39,14 @@ class DiffCommand extends BaseCommand
         $this->reader = $reader;
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
+    public function handle(): int
     {
-        [$src, $dest] = $this->getSrcAndDest();
+        try {
+            [$src, $dest] = $this->getSrcAndDest();
+        } catch (RuntimeException $exception) {
+            $this->error($exception->getMessage());
+            return Command::FAILURE;
+        }
 
         $envValues = $this->reader->read($dest);
         $exampleValues = $this->reader->read($src);
@@ -67,7 +71,7 @@ class DiffCommand extends BaseCommand
 
     private function errorText(): string
     {
-        $this->returnCode = 1;
+        $this->returnCode = Command::FAILURE;
         return '<error>NOT FOUND</error>';
     }
 }

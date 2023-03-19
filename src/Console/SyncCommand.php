@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Aranyasen\LaravelEnvSync\Console;
 
 use Aranyasen\LaravelEnvSync\SyncService;
 use Aranyasen\LaravelEnvSync\Writer\WriterInterface;
+use RuntimeException;
+use Symfony\Component\Console\Command\Command;
 
 class SyncCommand extends BaseCommand
 {
@@ -41,12 +45,14 @@ class SyncCommand extends BaseCommand
         $this->writer = $writer;
     }
 
-    /**
-     * Execute the console command.
-     */
-    public function handle(): void
+    public function handle(): int
     {
-        [$src, $dest] = $this->getSrcAndDest();
+        try {
+            [$src, $dest] = $this->getSrcAndDest();
+        } catch (RuntimeException $exception) {
+            $this->error($exception->getMessage());
+            return Command::FAILURE;
+        }
 
         if ($this->option('reverse')) {
             [$src, $dest] = [$dest, $src];
@@ -77,12 +83,13 @@ class SyncCommand extends BaseCommand
             if ($action === self::CHANGE) {
                 $diff = $this
                     ->output
-                    ->ask(sprintf("Please choose a value for '%s'", $key, $diff), null, fn($value) => $value);
+                    ->ask(sprintf("Please choose a value for '%s'", $key), null, fn($value) => $value);
             }
 
             $this->writer->append($dest, $key, $diff);
         }
 
-        $this->info($dest . ' is now synced with ' . $src . '.');
+        $this->info("{$dest} is now synced with {$src}.");
+        return Command::SUCCESS;
     }
 }

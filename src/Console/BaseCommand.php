@@ -1,20 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Aranyasen\LaravelEnvSync\Console;
 
 use Illuminate\Console\Command;
+use RuntimeException;
 
 class BaseCommand extends Command
 {
-    /**
-     * @return array
-     */
-    public function getSrcAndDest(): array
+    protected function getSrcAndDest(): array
     {
         if ($this->option('src') !== null || $this->option('dest') !== null) {
             if ($this->option('src') === null || $this->option('dest') === null) {
-                $this->error("You must use either both src and dest options, or none.");
-                exit(1);
+                throw new RuntimeException('You must use either both src and dest options, or none.');
             }
         }
 
