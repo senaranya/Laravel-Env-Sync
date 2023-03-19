@@ -3,7 +3,7 @@
   "description": "A package that makes sure that your .env file is in sync with your .env.example",
   "type": "library",
   "license": "MIT",
-  "keyword": ["Laravel", "dotenv", "diff", "sync"],
+  "keywords": ["Laravel", "dotenv", "diff", "sync"],
   "authors": [
     {
       "name": "Aranya Sen",
