@@ -1,0 +1,8 @@
+# Set default behavior for all files to normalize line endings to LF on checkout
+* text=auto eol=lf
+
+# Explicitly ensure PHP and configuration files use LF
+*.php text eol=lf
+*.xml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf

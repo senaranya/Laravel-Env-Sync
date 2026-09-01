@@ -14,7 +14,7 @@ class CheckCommandTest extends TestCase
     /** @test */
     public function it_should_return_0_when_keys_are_in_both_files(): void
     {
-        $this->setEnvFile('.env.example', "FOO=BAR\n" . "BAR=BAZ\n". "BAZ=FOO");
+        $this->setEnvFile('.env.example', "FOO=BAR\n" . "BAR=BAZ\n" . "BAZ=FOO");
         $this->setEnvFile('.env', "BAR=BAZ\n" . "FOO=BAR\n" . "BAZ=FOO");
 
         self::assertSame(CheckCommand::SUCCESS, Artisan::call('env:check'));

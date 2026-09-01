@@ -7,7 +7,7 @@
   "authors": [
     {
       "name": "Aranya Sen",
-      "email": "sen.aranya@gmail.com",
+      "email": "sen.aranya.tech@gmail.com",
       "role": "Owner"
     }
   ],
@@ -37,7 +37,7 @@
   },
   "scripts": {
     "test": "vendor/bin/phpunit tests/ --coverage-text",
-    "lint": "vendor/bin/phpcs"
+    "lint": "phpcs"
   },
   "extra": {
     "laravel": {

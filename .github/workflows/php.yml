@@ -6,46 +6,60 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  COVERAGE_PHP_VERSION: '8.3' # The primary PHP version used for code coverage uploads
+
 jobs:
   run:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        php-versions: [ '8.2', '8.3', '8.4' ]
+        php-versions: [ '8.2', '8.3', '8.4', '8.5' ]
     name: PHP ${{ matrix.php-versions }} Test on ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Install PHP
+      - name: Install PHP and Tools
         uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: phpcs
+          coverage: ${{ matrix.php-versions == env.COVERAGE_PHP_VERSION && 'xdebug' || 'none' }}
 
       - name: Check PHP Version
         run: php -v
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      - name: Run linter
+        run: phpcs
 
       - name: Cache Composer packages
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: vendor
-          key: ${{ runner.os }}-php-${{ matrix.php-versions }}-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-php-${{ matrix.php-versions }}-${{ hashFiles('**/composer.json') }}
           restore-keys: |
             ${{ runner.os }}-php-
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-#      - name: Run linter
-#        run: composer run-script lint
-#      - name: Run test suite
-#        run: composer run-script test
-      - name: Run test suite
-        run: XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+        run: composer install --prefer-dist --no-progress
 
-#      - name: scrutinizer
-#        run: |
-#          ls -l coverage.clover
-#          wget https://scrutinizer-ci.com/ocular.phar
-#          php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+      - name: Run test suite (with coverage)
+        if: matrix.php-versions == env.COVERAGE_PHP_VERSION
+        run: ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+      - name: Run test suite (without coverage)
+        if: matrix.php-versions != env.COVERAGE_PHP_VERSION
+        run: ./vendor/bin/phpunit
+
+      - name: Upload coverage to Codecov
+        if: matrix.php-versions == env.COVERAGE_PHP_VERSION
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./coverage.clover
+          token: ${{ secrets.CODECOV_TOKEN }}

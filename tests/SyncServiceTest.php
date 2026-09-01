@@ -45,6 +45,5 @@ class SyncServiceTest extends TestCase
         $sync = new SyncService($this->mock(ReaderInterface::class));
 
         $sync->getDiff($this->getFilePath('source'), $destination);
-
     }
 }

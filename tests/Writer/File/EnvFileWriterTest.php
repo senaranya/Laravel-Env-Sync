@@ -25,15 +25,24 @@ class EnvFileWriterTest extends TestCase
     public function it_should_append_content_to_file(): void
     {
         app()->instance(
-            ExceptionHandler::class, new class extends Handler {
-            public function __construct() {}
-            public function report(Throwable $e) {}
-            public function render($request, Throwable $e)
+            ExceptionHandler::class,
+            new class extends Handler
             {
-                echo $e->getMessage();
-                throw $e;
+                public function __construct()
+                {
+                    //
+                }
+                public function report(Throwable $e)
+                {
+                    //
+                }
+                public function render($request, Throwable $e)
+                {
+                    echo $e->getMessage();
+                    throw $e;
+                }
             }
-        });
+        );
 
         $filePath = $this->getFilePath('.env');
 

@@ -72,7 +72,10 @@ class SyncCommandTest extends TestCase
 
         $this
             ->artisan('env:sync')
-            ->expectsQuestion("'BAR' is not present into your .env file. Its default value is 'BAZ'. Would you like to add it?", 'y');
+            ->expectsQuestion(
+                "'BAR' is not present into your .env file. Its default value is 'BAZ'. Would you like to add it?",
+                'y'
+            );
         self::assertSame("FOO=BAR\nBAZ=FOO" . PHP_EOL . "BAR=BAZ", $this->getDotEnvContents('.env'));
     }
 
@@ -86,7 +89,10 @@ class SyncCommandTest extends TestCase
 
         $this
             ->artisan('env:sync')
-            ->expectsQuestion("'BAR' is not present into your .env file. Its default value is 'BAZ'. Would you like to add it?", 'n');
+            ->expectsQuestion(
+                "'BAR' is not present into your .env file. Its default value is 'BAZ'. Would you like to add it?",
+                'n'
+            );
         self::assertSame("FOO=BAR\nBAZ=FOO", $this->getDotEnvContents('.env'));
     }
 
@@ -100,7 +106,10 @@ class SyncCommandTest extends TestCase
 
         $this
             ->artisan('env:sync')
-            ->expectsQuestion("'BAR' is not present into your .env file. Its default value is 'BAZ'. Would you like to add it?", 'c')
+            ->expectsQuestion(
+                "'BAR' is not present into your .env file. Its default value is 'BAZ'. Would you like to add it?",
+                'c'
+            )
             ->expectsQuestion("Please choose a value for 'BAR'", "some_value");
         self::assertSame("FOO=BAR\nBAZ=FOO" . PHP_EOL . "BAR=some_value", $this->getDotEnvContents('.env'));
     }

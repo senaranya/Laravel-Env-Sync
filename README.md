@@ -1,10 +1,12 @@
-[![Tests](https://github.com/senaranya/Laravel-Env-Sync/workflows/Tests/badge.svg?branch=master&event=push)](https://github.com/senaranya/Laravel-Env-Sync/actions?query=branch%3Amaster)
-[![Scrutinizer](https://img.shields.io/scrutinizer/g/senaranya/Laravel-Env-Sync.svg?maxAge=3600)](https://scrutinizer-ci.com/g/senaranya/Laravel-Env-Sync/?branch=master)
-![Scrutinizer coverage](https://img.shields.io/scrutinizer/coverage/g/senaranya/Laravel-Env-Sync?style=plastic)
+<p align="center">
+  <a href="https://github.com/senaranya/Laravel-Env-Sync/actions/workflows/php.yml"><img src="https://github.com/senaranya/Laravel-Env-Sync/actions/workflows/php.yml/badge.svg?branch=master" alt="Tests"></a>
+  <a href="https://packagist.org/packages/aranyasen/laravel-env-sync"><img src="https://img.shields.io/packagist/v/aranyasen/laravel-env-sync.svg?style=flat-square&label=Current" alt="Current Version"></a>
+  <a href="https://packagist.org/packages/aranyasen/laravel-env-sync"><img src="https://img.shields.io/packagist/dt/aranyasen/laravel-env-sync.svg?style=flat-square" alt="Total Downloads"></a>
+  <a href="https://packagist.org/packages/aranyasen/laravel-env-sync"><img src="https://img.shields.io/packagist/l/aranyasen/laravel-env-sync.svg?style=flat-square" alt="License"></a>
+  <a href="https://codecov.io/gh/senaranya/Laravel-Env-Sync"><img src="https://img.shields.io/codecov/c/github/senaranya/Laravel-Env-Sync/master?style=flat-square" alt="Codecov Coverage"></a>
+</p>
 
-# Laravel Env Sync
-
-Keep your .env in sync with your .env.example or vice versa.
+## Keep your .env in sync with your .env.example or vice versa.
 
 It reads the .env.example file and makes suggestions to fill your .env accordingly. 
 
