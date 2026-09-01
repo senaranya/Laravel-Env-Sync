@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset name="LaravelEnvSync">
+    <description>Coding style standard for Laravel Env Sync</description>
+
+    <!-- Target directories -->
+    <file>src</file>
+    <file>tests</file>
+
+    <!-- Command-line options -->
+    <arg value="p"/> <!-- Show progress -->
+    <arg value="s"/> <!-- Show sniff codes in violation messages -->
+    <arg name="colors"/>
+
+    <!-- Use PER Coding Style (PER-CS) standard -->
+    <rule ref="PER-CS"/>
+</ruleset>
