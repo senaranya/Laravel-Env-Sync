@@ -75,7 +75,10 @@ class CheckCommand extends BaseCommand
             $this->info(sprintf("\t- %s = %s", $key, $diff));
         }
 
-        $this->info(sprintf("You can use `php artisan env:sync%s` to synchronise them", $this->option('reverse') ? ' --reverse' : ''));
+        $this->info(sprintf(
+            "You can use `php artisan env:sync%s` to synchronise them",
+            $this->option('reverse') ? ' --reverse' : ''
+        ));
 
         return 1;
     }

@@ -68,7 +68,12 @@ class SyncCommand extends BaseCommand
         foreach ($diffs as $key => $diff) {
             $action = self::YES;
             if (!$forceCopy) {
-                $question = sprintf("'%s' is not present into your %s file. Its default value is '%s'. Would you like to add it?", $key, basename($dest), $diff);
+                $question = sprintf(
+                    "'%s' is not present into your %s file. Its default value is '%s'. Would you like to add it?",
+                    $key,
+                    basename($dest),
+                    $diff
+                );
                 $action = $this->choice($question, [
                     self::YES => 'Copy the default value',
                     self::CHANGE => 'Change the default value',
