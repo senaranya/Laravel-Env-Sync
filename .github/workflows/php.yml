@@ -12,9 +12,6 @@ env:
 jobs:
   run:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
 
     strategy:
       matrix:
@@ -64,5 +61,5 @@ jobs:
         if: matrix.php-versions == env.COVERAGE_PHP_VERSION
         uses: codecov/codecov-action@v5
         with:
-          use_oidc: true
           files: ./coverage.clover
+          token: ${{ secrets.CODECOV_TOKEN }}

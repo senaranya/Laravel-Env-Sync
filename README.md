@@ -1,4 +1,10 @@
-[![Tests](https://github.com/senaranya/Laravel-Env-Sync/actions/workflows/php.yml/badge.svg?branch=master)](https://github.com/senaranya/Laravel-Env-Sync/actions/workflows/php.yml) [![Latest Stable Version](https://img.shields.io/packagist/v/aranyasen/laravel-env-sync.svg?style=flat-square)](https://packagist.org/packages/aranyasen/laravel-env-sync) [![Total Downloads](https://img.shields.io/packagist/dt/aranyasen/laravel-env-sync.svg?style=flat-square)](https://packagist.org/packages/aranyasen/laravel-env-sync) [![License](https://img.shields.io/packagist/l/aranyasen/laravel-env-sync.svg?style=flat-square)](https://packagist.org/packages/aranyasen/laravel-env-sync) [![Codecov Coverage](https://img.shields.io/codecov/c/github/senaranya/Laravel-Env-Sync/master?style=flat-square)](https://codecov.io/gh/senaranya/Laravel-Env-Sync)
+<p align="center">
+  <a href="https://github.com/senaranya/Laravel-Env-Sync/actions/workflows/php.yml"><img src="https://github.com/senaranya/Laravel-Env-Sync/actions/workflows/php.yml/badge.svg?branch=master" alt="Tests"></a>
+  <a href="https://packagist.org/packages/aranyasen/laravel-env-sync"><img src="https://img.shields.io/packagist/v/aranyasen/laravel-env-sync.svg?style=flat-square&label=Current" alt="Current Version"></a>
+  <a href="https://packagist.org/packages/aranyasen/laravel-env-sync"><img src="https://img.shields.io/packagist/dt/aranyasen/laravel-env-sync.svg?style=flat-square" alt="Total Downloads"></a>
+  <a href="https://packagist.org/packages/aranyasen/laravel-env-sync"><img src="https://img.shields.io/packagist/l/aranyasen/laravel-env-sync.svg?style=flat-square" alt="License"></a>
+  <a href="https://codecov.io/gh/senaranya/Laravel-Env-Sync"><img src="https://img.shields.io/codecov/c/github/senaranya/Laravel-Env-Sync/master?style=flat-square" alt="Codecov Coverage"></a>
+</p>
 
 ## Keep your .env in sync with your .env.example or vice versa.
 
