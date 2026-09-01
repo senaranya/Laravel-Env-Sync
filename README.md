@@ -1,20 +1,6 @@
-<!-- GitHub Workflow Status -->
-[![Tests](https://github.com/senaranya/Laravel-Env-Sync/actions/workflows/php.yml/badge.svg?branch=master)](https://github.com/senaranya/Laravel-Env-Sync/actions/workflows/php.yml)
+[![Tests](https://github.com/senaranya/Laravel-Env-Sync/actions/workflows/php.yml/badge.svg?branch=master)](https://github.com/senaranya/Laravel-Env-Sync/actions/workflows/php.yml) [![Latest Stable Version](https://img.shields.io/packagist/v/aranyasen/laravel-env-sync.svg?style=flat-square)](https://packagist.org/packages/aranyasen/laravel-env-sync) [![Total Downloads](https://img.shields.io/packagist/dt/aranyasen/laravel-env-sync.svg?style=flat-square)](https://packagist.org/packages/aranyasen/laravel-env-sync) [![License](https://img.shields.io/packagist/l/aranyasen/laravel-env-sync.svg?style=flat-square)](https://packagist.org/packages/aranyasen/laravel-env-sync) [![Codecov Coverage](https://img.shields.io/codecov/c/github/senaranya/Laravel-Env-Sync/master?style=flat-square)](https://codecov.io/gh/senaranya/Laravel-Env-Sync)
 
-<!-- Packagist Latest Version -->
-[![Latest Stable Version](https://img.shields.io/packagist/v/aranyasen/laravel-env-sync.svg?style=flat-square)](https://packagist.org/packages/aranyasen/laravel-env-sync)
-
-<!-- Packagist Total Downloads -->
-[![Total Downloads](https://img.shields.io/packagist/dt/aranyasen/laravel-env-sync.svg?style=flat-square)](https://packagist.org/packages/aranyasen/laravel-env-sync)
-
-<!-- License -->
-[![License](https://img.shields.io/packagist/l/aranyasen/laravel-env-sync.svg?style=flat-square)](https://packagist.org/packages/aranyasen/laravel-env-sync)
-
-<!-- Codecov Coverage -->
-[![Codecov Coverage](https://img.shields.io/codecov/c/github/senaranya/Laravel-Env-Sync/master?style=flat-square)](https://codecov.io/gh/senaranya/Laravel-Env-Sync)
-# Laravel Env Sync
-
-Keep your .env in sync with your .env.example or vice versa.
+## Keep your .env in sync with your .env.example or vice versa.
 
 It reads the .env.example file and makes suggestions to fill your .env accordingly. 
 
